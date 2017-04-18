@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spider>
+    <properties>
+        <property name="spider.crawler.queue.seed.jd" value="/crawler/seed/chat/jd" desc="京东种子队列名称"></property>
+        <property name="spider.crawler.queue.seed.comment.jd" value="/crawler/seed/comment/jd" desc=""></property>
+        <property name="spider.crawler.queue.error.jd" value="/crawler/error/chat/jd" desc="京东种子错误队列名称"></property>
+        <property name="spider.crawler.queue.error.comment.jd" value="/crawler/error/comment/jd" desc=""></property>
+        <property name="spider.crawler.chat.jd.classname" value="com.young.spider.crawler.crawler.support.jd.JDChatCrawler" desc="" />
+        <property name="spider.parser.chat.jd.seed.classname" value="com.young.spider.crawler.parser.support.jd.JDChatParser" desc="" />
+        <property name="spider.persist.chat.jd.classname" value="com.young.spider.crawler.persist.support.jd.JDChatPersister" desc="" />
+        <property name="spider.parser.chat.jd.detail.classname" value="com.young.spider.crawler.parser.support.jd.JDChatDetailParser" desc="" />
+        <property name="SPIDER.COUNTER.CRAWLER.JD.REQEUST" value="/spider/counter/crawler/jd/request" desc="" />
+        <property name="SPIDER.COUNTER.CRAWLER.JD.RESPONSE.OK" value="/spider/counter/crawler/jd/response/ok" desc="" />
+        <property name="SPIDER.COUNTER.CRAWLER.JD.RESPONSE.ERROR" value="/spider/counter/crawler/jd/response/error" desc="" />
+        <property name="spider.crawler.queue.seed.tmall" value="/crawler/seed/chat/tmall" desc=""/>
+        <property name="spider.crawler.queue.seed.comment.tmall" value="/crawler/seed/comment/tmall" desc=""></property>
+        <property name="spider.crawler.tmall.nickname.url" value="https://zizhanghao.taobao.com/subaccount/monitor/chat_record_query.htm" desc=""/>
+        <property name="spider.crawler.chat.tmall.nick.classname" value="com.young.spider.crawler.crawler.support.tmall.TmallNickNamesCrawler" desc=""/>
+        <property name="spider.parser.chat.tmall.nick.classname" value="com.young.spider.crawler.parser.support.tmall.TmallNickNameParser" desc=""/>
+        <property name="spider.crawler.chat.tmall.customer.classname" value="com.young.spider.crawler.crawler.support.tmall.TmallSeedCrawler" desc=""/>
+        <property name="spider.parser.chat.tmall.customer.classname" value="com.young.spider.crawler.parser.support.tmall.TmallSeedParser" desc=""/>
+        <property name="spider.crawler.queue.error.tmall" value="/crawler/error/chat/tmall" desc=""/>
+        <property name="spider.crawler.queue.error.comment.tmall" value="/crawler/error/comment/tmall" desc=""></property>
+        <property name="spider.crawler.chat.tmall.detail.classname" value="com.young.spider.crawler.crawler.support.tmall.TmallChatDetailCrawler" desc=""/>
+        <property name="spider.parser.chat.tmall.detail.classname" value="com.young.spider.crawler.parser.support.tmall.TmallDetailParser" desc=""/>
+        <property name="spider.persister.chat.tmall.detail.classname" value="com.young.spider.crawler.persist.support.tmall.TmallChatPersister" desc=""/>
+        <property name="spider.crawler.cache.classname" value="com.young.spider.distribution.cache.support.ZKDistributedCache" desc="" />
+        <property name="spider.crawler.cache.name" value="/spider/queue/crawler/cache" desc="" />
+        <property name="spider.crawler.webdriver.chrome.logfile" value="/data/scs/logs/chromedriver.log" desc="" />
+        <property name="spider.crawler.webdriver.chrome.headless" value="false" desc="" />
+        <property name="spider.crawler.webdriver.screenshot.dir" value="/data/scs/screenshots" desc="" />
+        <property name="spider.crawler.login.retry.count" value="3" desc="" />
+        <property name="spider.crawler.login.retry.interval.seconds" value="5" desc="" />
+    </properties>
+    <messageQueue classname="com.young.spider.distribution.mq.support.ZKSimpleBlockingQueue" queueNamePrefix="/spider/queue" />
+    <cookies storage="com.young.spider.crawler.cookie.support.ZkCookieStorage">
+        <login type="JD" classname="com.young.spider.crawler.cookie.support.JDLoginAction" queue="/crawler/cookie/jd" username="" password="" url="https://passport.jd.com/new/login.aspx?ReturnUrl=http://shop.chat.jd.com/index.action" stepSleep="3000">
+            <params>
+                <param name="spider.crawler.login.jd.loginpagecss" value="div.login-tab.login-tab-r"></param>
+                <param name="spider.crawler.login.jd.usercss" value="loginname"></param>
+                <param name="spider.crawler.login.jd.passcss" value="nloginpwd"></param>
+                <param name="spider.crawler.login.jd.submitcss" value="a#loginsubmit.btn-img.btn-entry"/>
+                <param name="spider.crawler.login.jd.newpage" value="http://kf.jd.com/"/>
+            </params>
+        </login>
+        <login type="TMALL" classname="com.young.spider.crawler.cookie.support.TMallLoginAction" queue="/crawler/cookie/tmall" username="" password="" url="https://login.taobao.com/member/login.jhtml" stepSleep="3000">
+            <params>
+                <param name="spider.crawler.login.tmall.loginpagecss" value="a.forget-pwd.J_Quick2Static"></param>
+                <param name="spider.crawler.login.tmall.usercss" value="TPL_username_1"></param>
+                <param name="spider.crawler.login.tmall.passcss" value="TPL_password_1"></param>
+                <param name="spider.crawler.login.tmall.submitcss" value="button#J_SubmitStatic.J_Submit"/>
+            </params>
+        </login>
+    </cookies>
+    <threads poolsize="30">
+        <thread name="jd_crawler_detail_thread" classname="com.young.spider.crawler.thread.jd.JDChatCrawlerThread" size="2" use="true"></thread>
+        <thread name="tmall_crawler_detail_thread" classname="com.young.spider.crawler.thread.tmall.TmallChatCrawlerThread" size="5" use="true"></thread>
+        <thread name="jd_crawler_comment_thread" classname="com.young.spider.crawler.thread.jd.JDCommentCrawlerThread" size="2" use="true"/>
+        <thread name="tmall_crawler_comment_thread" classname="com.young.spider.crawler.thread.tmall.TmallCommentCrawlerThread" size="2" use="true" />
+    </threads>
+    <tasks>
+        <task name="JDseedTask" classname="com.young.spider.crawler.task.JDCrawlerSeedTask" use="true"/>
+        <task name="TMallseedTask" classname="com.young.spider.crawler.task.TmallCrawlerSeedTask" use="true" />
+    </tasks>
+
+</spider>
