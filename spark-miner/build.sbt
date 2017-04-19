@@ -16,7 +16,8 @@ libraryDependencies ++= {
     "org.apache.spark" %% "spark-core" % spark_version,
     "org.apache.spark" %% "spark-mllib" % spark_version,
     "redis.clients" % "jedis" % "2.8.1",
-    "org.ansj" % "ansj_seg" % "5.1.1"
+    "org.ansj" % "ansj_seg" % "5.1.1",
+    "mysql" % "mysql-connector-java" % "5.1.39"
   )
 }
     
