@@ -15,7 +15,11 @@ class WordIndexAccessApiByMysql extends WordIndexAccessApi {
     val con = DBConnection.getConnection()
     val stmt = con.createStatement()
     val rs = stmt.executeQuery("select id from scs_word_index where word = '" + word + "'")
-    Option(if (rs.next()) rs.getInt(1) else null)
+    if (rs.next()) {
+      Option(rs.getInt(1))
+    } else {
+      Option.empty
+    }
   }
 
   override def saveWord(word: String): Option[Int] = {
@@ -24,7 +28,11 @@ class WordIndexAccessApiByMysql extends WordIndexAccessApi {
     ps.setString(1, word)
     ps.executeUpdate()
     val rs = ps.getGeneratedKeys
-    Option(if (rs.next()) rs.getInt(1) else null)
+    if(rs.next()){
+      Option(rs.getInt(1))
+    }else{
+      Option.empty
+    }
   }
 
   override def getWordIndex(): scala.collection.mutable.Map[String, Int] = {
@@ -32,8 +40,8 @@ class WordIndexAccessApiByMysql extends WordIndexAccessApi {
     val stmt = con.createStatement()
     val rs = stmt.executeQuery("select * from scs_word_index")
     val map = mutable.HashMap.empty[String, Int]
-    while(rs.next()){
-      map.put(rs.getString("word"),rs.getInt("id"))
+    while (rs.next()) {
+      map.put(rs.getString("word"), rs.getInt("id"))
     }
     map
   }
