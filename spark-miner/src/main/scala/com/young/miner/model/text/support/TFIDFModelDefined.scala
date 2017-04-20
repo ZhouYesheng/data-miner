@@ -9,14 +9,13 @@ import org.apache.spark.mllib.linalg.{Vector, Vectors}
 import org.apache.spark.rdd.RDD
 
 import scala.collection.JavaConversions._
-import scala.collection.mutable
 
 /**
   * Created by yangyong on 17-4-16.
   */
 class TFIDFModelDefined(minDocFreq: Int = 2) extends TextModel[Document] {
 
-  private var idf: mutable.Map[String, Double] = new mutable.HashMap[String, Double]
+  private var idf = Map[String, Double]()
 
   override def saveModel(sparkContext: SparkContext, modelPath: String): Unit = ???
 
@@ -27,6 +26,7 @@ class TFIDFModelDefined(minDocFreq: Int = 2) extends TextModel[Document] {
     terms.map(term => term.getName)
   }
 
+
   private def tfidf(fenci: Seq[String]): Vector = {
     val seq = fenci.groupBy(word => word).map(kv => (WordIndexBox.getIndex(kv._1), kv._2.length * 1.0 * idf.getOrElse(kv._1, 0.0))).toSeq
     Vectors.sparse(seq.length, seq)
@@ -34,16 +34,15 @@ class TFIDFModelDefined(minDocFreq: Int = 2) extends TextModel[Document] {
 
   override def training(documents: RDD[Document]): Unit = {
     val doc_num = documents.count()
-    val docNumMap = new mutable.HashMap[String, Double]
-    documents.map(document => document2word(document).toSet.map((_,1)))
-    idf = docNumMap.map(kv => (kv._1, Math.log10(doc_num / kv._2)))
+    val docNumMap = documents.map(document => document2word(document).toSet).flatMap(x => x).map((_, 1)).countByKey()
+    idf = docNumMap.map(kv => (kv._1, Math.log10(doc_num / kv._2))).toMap
   }
 
   def tfidf(document: Document): Vector = {
-    val tf = tf(document2word(document))
+    tfidf(document2word(document))
   }
 
   def tfidf(documents: RDD[Document]): RDD[(Int, Vector)] = {
-    null
+    documents.map(document => (document.id, tfidf(document)))
   }
 }
