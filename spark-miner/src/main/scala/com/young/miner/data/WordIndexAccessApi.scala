@@ -2,6 +2,8 @@ package com.young.miner.data
 
 import java.sql.{ResultSet, Statement, Connection}
 
+import org.apache.commons.collections.bidimap.DualHashBidiMap
+
 /**
   * Created by yangyong3 on 2017/4/19.
   */
@@ -11,7 +13,7 @@ trait WordIndexAccessApi {
 
   def saveWord(word: String): Option[Int]
 
-  def getWordIndex(): scala.collection.mutable.Map[String, Int]
+  def getWordIndex(): DualHashBidiMap
 
   def close(con: Connection, stmt: Statement, rs: ResultSet): Unit = {
     if (con != null)

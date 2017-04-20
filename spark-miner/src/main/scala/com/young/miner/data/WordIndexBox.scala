@@ -5,7 +5,7 @@ import com.young.miner.data.support.WordIndexAccessApiByMysql
 /**
   * Created by yangyong3 on 2017/4/19.
   */
-object WordIndexBox {
+object WordIndexBox extends Serializable{
 
   val wordIndexAccess = new WordIndexAccessApiByMysql
 
@@ -13,10 +13,14 @@ object WordIndexBox {
 
   def getIndex(word: String): Int = {
     var index = wordIndexBox.get(word)
-    if (index.isEmpty) {
+    if (index == null) {
       index = wordIndexAccess.saveWord(word)
-      wordIndexBox.put(word, index.get)
+      wordIndexBox.put(word, index)
     }
-    index.get
+    index.asInstanceOf[Int]
+  }
+
+  def getWord(id: Int): String = {
+    wordIndexBox.getKey(id).toString
   }
 }

@@ -4,8 +4,7 @@ import java.sql.Statement
 
 import com.young.miner.data.WordIndexAccessApi
 import com.young.miner.db.DBConnection
-
-import scala.collection.mutable
+import org.apache.commons.collections.bidimap.DualHashBidiMap
 
 /**
   * Created by yangyong3 on 2017/4/19.
@@ -35,11 +34,11 @@ class WordIndexAccessApiByMysql extends WordIndexAccessApi {
     }
   }
 
-  override def getWordIndex(): scala.collection.mutable.Map[String, Int] = {
+  override def getWordIndex(): DualHashBidiMap = {
     val con = DBConnection.getConnection()
     val stmt = con.createStatement()
     val rs = stmt.executeQuery("select * from scs_word_index")
-    val map = mutable.HashMap.empty[String, Int]
+    val map = new DualHashBidiMap
     while (rs.next()) {
       map.put(rs.getString("word"), rs.getInt("id"))
     }
