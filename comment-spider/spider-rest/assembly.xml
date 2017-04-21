@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+    <!-- 最终生成的包名称为artifactId-version-id.format，
+            id主要用来区分包是由哪个assembly文件生成的，本例中
+            artifactId：test
+            version：1.0.0
+            id：bin
+            format：tar.gz
+            最终将会在target文件夹下生成一个名为test-1.0.0-bin.tar.gz的包 -->
+    <id>bin</id>
+    <!-- zip, tar, tar.gz, tar.bz2, jar, dir, war 也是支持的  -->
+    <formats>
+        <!-- 可以同时打多种格式的包  -->
+        <format>tar.gz</format>
+        <!-- <format>zip</format> -->
+    </formats>
+    <!--  默认值是true，此时将创建一个名为artifactId-version的根文件夹，
+            所有outputDirectory标签指定的路径将变为相对于该文件夹的路径。
+            例如：outputDirectoryS的值为/test，则最终径为/artifactId-version/test
+            如果includeBaseDirectory的值是false，则最终路径为/test  -->
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <dependencySets>
+        <dependencySet>
+            <!--  true是默认值，本次构建出来的jar包属于当前这个dependencySet，
+                    此时jar包将会被添加至新的tar.gz包中  -->
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>/libs</outputDirectory>
+            <unpack>false</unpack>
+        </dependencySet>
+    </dependencySets>
+
+    <fileSets>
+        <!-- 如果存在fileSet标签，并且在标签中没有使用includes标签指定打入包中的文件，
+                默认情况下，工程中的所有文件（源文件、编译后产生的.class文件、配置文件等）
+                都会被打入包中  -->
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory>/config</outputDirectory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+        <!--
+        <fileSet>
+            <directory>${project.basedir}/dic</directory>
+            <outputDirectory>/dic</outputDirectory>
+            <includes>
+                <include>*</include>
+            </includes>
+        </fileSet>
+        -->
+        <fileSet>
+            <directory>${project.basedir}/script</directory>
+            <outputDirectory>/bin</outputDirectory>
+            <includes>
+                <include>*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/logs</directory>
+            <outputDirectory>/logs</outputDirectory>
+            <includes>
+                <include>*</include>
+            </includes>
+        </fileSet>
+
+    </fileSets>
+
+
+</assembly>

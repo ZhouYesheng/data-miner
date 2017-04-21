@@ -3,10 +3,9 @@ package com.young.miner.service.support
 import com.young.miner.entity.{CommentLog, Document}
 import com.young.miner.model.text.support.TFIDFModel
 import com.young.miner.service.BaseService
-import org.apache.spark.SparkContext
-import org.apache.spark.rdd.RDD
 import org.apache.spark.mllib.linalg.Vector
 import org.apache.spark.mllib.regression.LabeledPoint
+import org.apache.spark.rdd.RDD
 
 /**
   * Created by yangyong on 17-4-16.

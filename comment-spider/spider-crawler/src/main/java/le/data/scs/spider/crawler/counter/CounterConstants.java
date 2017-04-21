@@ -1,0 +1,19 @@
+package le.data.scs.spider.crawler.counter;
+
+/**
+ * Created by young.yang on 2017/2/25.
+ */
+public class CounterConstants {
+    public static final String SPIDER_COUNTER_CRAWLER_JD_REQEUST = "SPIDER.COUNTER.CRAWLER.JD.REQEUST";
+
+    public static final String SPIDER_COUNTER_CRAWLER_JD_RESPONSE_OK = "SPIDER.COUNTER.CRAWLER.JD.RESPONSE.OK";
+
+    public static final String SPIDER_COUNTER_CRAWLER_JD_RESPONSE_ERROR = "SPIDER.COUNTER.CRAWLER.JD.RESPONSE.ERROR";
+
+    public static final String SPIDER_COUNTER_CRAWLER_TMALL_REQUEST = "SPIDER.COUNTER.CRAWLER.TMALL.REQUEST";
+
+    public static final String SPIDER_COUNTER_CRAWLER_TMALL_RESPONSE_OK = "SPIDER.COUNTER.CRAWLER.TMALL.RESPONSE.OK";
+
+    public static final String SPIDER_COUNTER_CRAWLER_TMALL_RESPONSE_ERROR = "SPIDER.COUNTER.CRAWLER.TMALL.RESPONSE.ERROR";
+
+}

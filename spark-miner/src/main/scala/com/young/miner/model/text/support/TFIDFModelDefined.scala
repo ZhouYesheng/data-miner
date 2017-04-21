@@ -15,7 +15,7 @@ import scala.collection.JavaConversions._
   */
 class TFIDFModelDefined(minDocFreq: Int = 2) extends TextModel[Document] {
 
-  private var idf = Map[String, Double]()
+  private var idf = Map[Int, Double]()
 
   override def saveModel(sparkContext: SparkContext, modelPath: String): Unit = ???
 
@@ -23,26 +23,23 @@ class TFIDFModelDefined(minDocFreq: Int = 2) extends TextModel[Document] {
 
   private def document2word(document: Document): Seq[String] = {
     val terms = NlpAnalysis.parse(document.text).getTerms
-    terms.map(term => term.getName)
+    terms.map(term => term.getName).filter(_.length<=10)
   }
 
+  private def tfidf(fenci: Seq[String]): Map[Int,Double] = fenci.groupBy(word => word).map(kv => (WordIndexBox.getIndex(kv._1), kv._2.length * 1.0 * idf.getOrElse(WordIndexBox.getIndex(kv._1), 0.0)))
 
-  private def tfidf(fenci: Seq[String]): Vector = {
-    val seq = fenci.groupBy(word => word).map(kv => (WordIndexBox.getIndex(kv._1), kv._2.length * 1.0 * idf.getOrElse(kv._1, 0.0))).toSeq
-    Vectors.sparse(seq.length, seq)
-  }
 
   override def training(documents: RDD[Document]): Unit = {
     val doc_num = documents.count()
-    val docNumMap = documents.map(document => document2word(document).toSet).flatMap(x => x).map((_, 1)).countByKey()
-    idf = docNumMap.map(kv => (kv._1, Math.log10(doc_num / kv._2))).toMap
+    val docNumMap = documents.map(document => document2word(document).toSet).flatMap(x => x).map(x=>(WordIndexBox.getIndex(x), 1)).groupByKey().map(x=>(x._1, Math.log10(doc_num / x._2.size)))
+    idf = docNumMap.collect().toMap
   }
 
-  def tfidf(document: Document): Vector = {
+  def tfidf(document: Document): Map[Int,Double] = {
     tfidf(document2word(document))
   }
 
-  def tfidf(documents: RDD[Document]): RDD[(Int, Vector)] = {
+  def tfidf(documents: RDD[Document]): RDD[(Int, Map[Int,Double])] = {
     documents.map(document => (document.id, tfidf(document)))
   }
 }
