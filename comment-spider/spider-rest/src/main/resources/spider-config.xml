@@ -38,7 +38,7 @@
     </properties>
     <messageQueue classname="le.data.scs.spider.distribution.mq.support.ZKSimpleBlockingQueue" queueNamePrefix="/spider/queue" />
     <cookies storage="le.data.scs.spider.crawler.cookie.support.ZkCookieStorage">
-        <login type="JD" classname="le.data.scs.spider.crawler.cookie.support.JDLoginAction" queue="/crawler/cookie/jd" username="乐视旗舰店" password="leshi123456" url="https://passport.jd.com/new/login.aspx?ReturnUrl=http://shop.chat.jd.com/index.action" stepSleep="3000">
+        <login type="JD" classname="le.data.scs.spider.crawler.cookie.support.JDLoginAction" queue="/crawler/cookie/jd" username="" password="" url="https://passport.jd.com/new/login.aspx?ReturnUrl=http://shop.chat.jd.com/index.action" stepSleep="3000">
             <params>
                 <param name="spider.crawler.login.jd.loginpagecss" value="div.login-tab.login-tab-r"></param>
                 <param name="spider.crawler.login.jd.usercss" value="loginname"></param>
@@ -47,7 +47,7 @@
                 <param name="spider.crawler.login.jd.newpage" value="http://kf.jd.com/"/>
             </params>
         </login>
-        <login type="TMALL" classname="le.data.scs.spider.crawler.cookie.support.TMallLoginAction" queue="/crawler/cookie/tmall" username="乐视官方旗舰店:蒙多" password="letv123" url="https://login.taobao.com/member/login.jhtml" stepSleep="3000">
+        <login type="TMALL" classname="le.data.scs.spider.crawler.cookie.support.TMallLoginAction" queue="/crawler/cookie/tmall" username="" password="" url="https://login.taobao.com/member/login.jhtml" stepSleep="3000">
             <params>
                 <param name="spider.crawler.login.tmall.loginpagecss" value="a.forget-pwd.J_Quick2Static"></param>
                 <param name="spider.crawler.login.tmall.usercss" value="TPL_username_1"></param>
