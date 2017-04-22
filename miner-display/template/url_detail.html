@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gentelella Alela! | </title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+   <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <script src="echarts/echarts.min.js"></script>
+    <script src="echarts/echarts-wordcloud.min.js"></script>
+    <script src="echarts/jquery.js"></script>
+
+  </head>
+  <body onload="allload()">
+  <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+  <div id="keyword" style="width: 600px;height:400px;"></div>
+  <script type="text/javascript">
+
+
+    function keyword(){
+      // 基于准备好的dom，初始化echarts实例
+      option = {
+        title: {
+          text: '评论关注点分析',
+          link: 'https://www.baidu.com/s?wd=' + encodeURIComponent('ECharts'),
+          x: 'center',
+          textStyle: {
+            fontSize: 23
+          }
+
+        },
+        backgroundColor: '#F7F7F7',
+        tooltip: {
+          show: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {
+              iconStyle: {
+                normal: {
+                  color: '#FFFFFF'
+                }
+              }
+            }
+          }
+        },
+        series: [{
+          name: '关键词权重',
+          type: 'wordCloud',
+          //size: ['9%', '99%'],
+          sizeRange: [6, 66],
+          //textRotation: [0, 45, 90, -45],
+          rotationRange: [-45, 90],
+          //shape: 'circle',
+          textPadding: 0,
+          autoSize: {
+            enable: true,
+            minSize: 6
+          },
+          textStyle: {
+            normal: {
+              color: function() {
+                return 'rgb(' + [
+                          Math.round(Math.random() * 160),
+                          Math.round(Math.random() * 160),
+                          Math.round(Math.random() * 160)
+                        ].join(',') + ')';
+              }
+            },
+            emphasis: {
+              shadowBlur: 10,
+              shadowColor: '#333'
+            }
+          },
+          data: [{
+            name: "Jayfee",
+            value: 666
+          }, {
+            name: "Nancy",
+            value: 520
+          }]
+        }]
+      };
+      var myChart = echarts.init(document.getElementById('keyword'));
+//        $.get("",function(data,status){
+//          alert("数据: " + data + "\n状态: " + status);
+//        });
+
+        $.getJSON("echarts/keyword.json",function(data){
+          option.series[0].data = data;
+          myChart.setOption(option);
+        });
+    }
+
+    function allload(){
+      keyword();
+    }
+
+  </script>
+  </body>
+
+</html>
