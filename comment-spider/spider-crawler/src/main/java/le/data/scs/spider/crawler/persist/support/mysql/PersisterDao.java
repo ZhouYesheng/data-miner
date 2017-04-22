@@ -185,7 +185,7 @@ public class PersisterDao {
         PreparedStatement stmt = null;
         try {
             StringBuilder sql = new StringBuilder(100);
-            sql.append("update into scs_comment_seed set status = ? where md5=?");
+            sql.append("update scs_comment_seed set status = ? where md5=?");
             con = DBConnection.getConnection();
             stmt = con.prepareStatement(sql.toString());
             stmt.setInt(1,status);

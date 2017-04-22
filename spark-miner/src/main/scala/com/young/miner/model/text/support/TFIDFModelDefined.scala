@@ -23,23 +23,23 @@ class TFIDFModelDefined(minDocFreq: Int = 2) extends TextModel[Document] {
 
   private def document2word(document: Document): Seq[String] = {
     val terms = NlpAnalysis.parse(document.text).getTerms
-    terms.map(term => term.getName).filter(_.length<=10)
+    terms.map(term => term.getName).filter(x => x.length <= 10 && x.length > 1)
   }
 
-  private def tfidf(fenci: Seq[String]): Map[Int,Double] = fenci.groupBy(word => word).map(kv => (WordIndexBox.getIndex(kv._1), kv._2.length * 1.0 * idf.getOrElse(WordIndexBox.getIndex(kv._1), 0.0)))
+  private def tfidf(fenci: Seq[String]): Map[Int, Double] = fenci.groupBy(word => word).map(kv => (WordIndexBox.getIndex(kv._1), kv._2.length * 1.0 * idf.getOrElse(WordIndexBox.getIndex(kv._1), 0.0)))
 
 
   override def training(documents: RDD[Document]): Unit = {
     val doc_num = documents.count()
-    val docNumMap = documents.map(document => document2word(document).toSet).flatMap(x => x).map(x=>(WordIndexBox.getIndex(x), 1)).groupByKey().map(x=>(x._1, Math.log10(doc_num / x._2.size)))
+    val docNumMap = documents.map(document => document2word(document).toSet).flatMap(x => x).map(x => (WordIndexBox.getIndex(x), 1)).groupByKey().map(x => (x._1, Math.log10(doc_num / x._2.size)))
     idf = docNumMap.collect().toMap
   }
 
-  def tfidf(document: Document): Map[Int,Double] = {
+  def tfidf(document: Document): Map[Int, Double] = {
     tfidf(document2word(document))
   }
 
-  def tfidf(documents: RDD[Document]): RDD[(Int, Map[Int,Double])] = {
+  def tfidf(documents: RDD[Document]): RDD[(Int, Map[Int, Double])] = {
     documents.map(document => (document.id, tfidf(document)))
   }
 }

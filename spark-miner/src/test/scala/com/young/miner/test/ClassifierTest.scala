@@ -20,7 +20,7 @@ object ClassifierTest {
     val classifierService = new ClassifierService(vectorService)
     vectorService.trainingModel(commentLogs)
     classifierService.traingModel(commentLogs)
-    val predd = dataApi.findCommentLog(SparkTool.sparkContext,"0")
+    val predd = dataApi.findCommentLog(SparkTool.sparkContext,"1")
     val predata = vectorService.text2Vector(predd)
     val classifierResult = classifierService.classifier(predata)
     classifierResult.foreach(println _)
