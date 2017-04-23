@@ -1,0 +1,1 @@
+JAVA_OPTS="-Xms256m -Xmx1024m" scala -cp ../target/scala-2.11/spark-miner-assembly-1.0.jar com.young.miner.service.support.FeatureFetchService $1

@@ -1,3 +1,5 @@
+import sbtassembly.MergeStrategy
+
 name := "spark-miner"
 
 version := "1.0"
@@ -12,6 +14,7 @@ resolvers ++= Seq("Typesafe Repository" at "http://repo.typesafe.com/typesafe/re
 
 libraryDependencies ++= {
   val spark_version = "1.6.2"
+  val jsckson_version= "1.9.13"
   Seq(
     "org.apache.spark" %% "spark-core" % spark_version,
     "org.apache.spark" %% "spark-mllib" % spark_version,
@@ -20,4 +23,9 @@ libraryDependencies ++= {
     "mysql" % "mysql-connector-java" % "5.1.39"
   )
 }
-    
+assemblyMergeStrategy in assembly := {
+  case "application.conf"                            => MergeStrategy.concat
+  case "unwanted.txt"                                => MergeStrategy.discard
+  case PathList(ps @ _*) if ps.contains("META-INF") => MergeStrategy.discard
+  case x => MergeStrategy.first
+}

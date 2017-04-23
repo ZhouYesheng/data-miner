@@ -78,7 +78,7 @@ object FeatureFetchService {
     //8565438dec61ba76cd85b955697de41b
     //ed53e949acecdbc9b3ecd5564ff136bc
     val mapper = new ObjectMapper()
-    val keywords = FeatureFetchService.getFeatures(SparkTool.sparkContext,"ed53e949acecdbc9b3ecd5564ff136bc")
+    val keywords = FeatureFetchService.getFeatures(SparkTool.sparkContext,args(0))
     val json = mapper.writeValueAsString(keywords)
     FileUtils.writeStringToFile(new File(MinerConfig.data_miner_keyword_path),json,"utf-8")
   }
