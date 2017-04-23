@@ -16,7 +16,7 @@ import scala.collection.mutable.ListBuffer
   */
 class DataAccessByMysql(partitation: Int = 1) extends DataAccessApi {
 
-  private val  df = new DecimalFormat("#.00");
+  private val df = new DecimalFormat("#.00");
 
   override def findCommentLog(sparkContext: SparkContext, commentType: String): RDD[CommentLog] = {
     var sql = ""
@@ -60,16 +60,21 @@ class DataAccessByMysql(partitation: Int = 1) extends DataAccessApi {
     close(null, stmt, null)
   }
 
-  override def getKeywords(md5:String):Array[WordWeight]={
+  override def getKeywords(md5: String): Array[WordWeight] = {
     val con = DBConnection.getInstance()
     val stmt = con.createStatement()
-    val rs = stmt.executeQuery("select wordtext as name,weight as value from scs_comment_keyword where md5 = '"+md5+"' order by weight desc")
+    val rs = stmt.executeQuery("select wordtext as name,weight as value from scs_comment_keyword where md5 = '" + md5 + "' order by weight desc")
     val list = ListBuffer[WordWeight]()
-    while(rs.next()){
-      list.+=(WordWeight(rs.getString(1),rs.getDouble(2)))
+    while (rs.next()) {
+      list.+=(WordWeight(rs.getString(1), rs.getDouble(2)))
     }
-    close(null,stmt,rs)
+    close(null, stmt, rs)
     list.toArray
+  }
+
+  override def findCommentLogByMd5(sparkContext: SparkContext, md5: String): RDD[CommentLog] = {
+    val sql = "select log.id,log.md5,log.content from scs_comment_log log,scs_comment_seed seed where ?=? and log.md5 = seed.md5 and seed.md5 = '" + md5 + "'"
+    new JdbcRDD[CommentLog](sparkContext, DBConnection.getConnection, sql, 1, 1, partitation, rs => CommentLog(rs.getInt("id"), rs.getString("content")))
   }
 }
 

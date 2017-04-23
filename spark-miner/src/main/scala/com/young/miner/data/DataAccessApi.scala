@@ -12,6 +12,8 @@ import org.apache.spark.rdd.RDD
 trait DataAccessApi extends Serializable {
   def findCommentLog(sparkContext: SparkContext, commentType: String): RDD[CommentLog]
 
+  def findCommentLogByMd5(sparkContext: SparkContext,md5:String):RDD[CommentLog]
+
   def findCommentLog(md5:String):CommentLog
 
   def saveCommentKeywords(md5:String,keywords:Array[WordWeight])
