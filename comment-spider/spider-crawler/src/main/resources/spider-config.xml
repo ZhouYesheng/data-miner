@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spider>
+    <!--程序中用到的properties配置-->
     <properties>
         <property name="spider.crawler.queue.seed.jd" value="/crawler/seed/chat/jd" desc="京东种子队列名称"></property>
         <property name="spider.crawler.queue.seed.comment.jd" value="/crawler/seed/comment/jd" desc=""></property>
@@ -36,7 +37,9 @@
         <property name="spider.crawler.lemall.mysql.pass" value="MzQwOGRjNGZiYj54Qw"/>
         <property name="spider.crawler.lemall.batch.size" value="6"/>
     </properties>
+    <!--分布式队列配置-->
     <messageQueue classname="le.data.scs.spider.distribution.mq.support.ZKSimpleBlockingQueue" queueNamePrefix="/spider/queue" />
+    <!--处理网站登录-->
     <cookies storage="le.data.scs.spider.crawler.cookie.support.ZkCookieStorage">
         <login type="JD" classname="le.data.scs.spider.crawler.cookie.support.JDLoginAction" queue="/crawler/cookie/jd" username="" password="" url="https://passport.jd.com/new/login.aspx?ReturnUrl=http://shop.chat.jd.com/index.action" stepSleep="3000">
             <params>
@@ -56,12 +59,14 @@
             </params>
         </login>
     </cookies>
+    <!--线程池配置-->
     <threads poolsize="30">
         <thread name="jd_crawler_detail_thread" classname="le.data.scs.spider.crawler.thread.jd.JDChatCrawlerThread" size="2" use="false"></thread>
         <thread name="tmall_crawler_detail_thread" classname="le.data.scs.spider.crawler.thread.tmall.TmallChatCrawlerThread" size="5" use="false"></thread>
         <thread name="jd_crawler_comment_thread" classname="le.data.scs.spider.crawler.thread.jd.JDCommentCrawlerThread" size="2" use="true"/>
         <thread name="tmall_crawler_comment_thread" classname="le.data.scs.spider.crawler.thread.tmall.TmallCommentCrawlerThread" size="2" use="true" />
     </threads>
+    <!--zookeeper leader task配置-->
     <tasks>
         <task name="JDseedTask" classname="le.data.scs.spider.crawler.task.JDCrawlerSeedTask" use="false"/>
         <task name="TMallseedTask" classname="le.data.scs.spider.crawler.task.TmallCrawlerSeedTask" use="false" />

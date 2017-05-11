@@ -10,6 +10,7 @@ import le.data.scs.spider.crawler.persist.support.mysql.PersisterDao;
 
 /**
  * Created by yangyong3 on 2017/3/8.
+ * 京东评论存储工具
  */
 public class JDCommentPersister implements Persister<CommentLog, JDCommentEntity> {
 

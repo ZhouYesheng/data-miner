@@ -11,6 +11,7 @@ import java.util.Objects;
 
 /**
  * Created by yangyong3 on 2017/3/9.
+ * 天猫评论抓取器
  */
 public class TmallCommentCrawler extends CrawlerAdapter<TMallCommentEntity> {
 

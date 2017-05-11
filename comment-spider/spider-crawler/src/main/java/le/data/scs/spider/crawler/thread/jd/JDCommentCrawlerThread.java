@@ -20,6 +20,7 @@ import le.data.scs.spider.thread.AbstractProcess;
 
 /**
  * Created by yangyong3 on 2017/3/8.
+ * 京东评论抓取线程
  */
 public class JDCommentCrawlerThread extends AbstractProcess<JDCommentEntity> {
     public JDCommentCrawlerThread(String seedQueueName, String errorQueueName, Class<JDCommentEntity> jdCommentEntityClass) {

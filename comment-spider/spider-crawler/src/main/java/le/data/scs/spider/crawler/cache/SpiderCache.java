@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * Created by yangyong3 on 2017/3/1.
+ * 缓存工厂类，通过该类获取系统需要的缓存
  */
 public class SpiderCache {
 

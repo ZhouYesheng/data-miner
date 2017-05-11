@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * Created by yangyong3 on 2017/3/9.
+ * 天猫评论解析器
  */
 public class TmallCommentParser implements Parser<CommentLog,TMallCommentEntity> {
     @Override

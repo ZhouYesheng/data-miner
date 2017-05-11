@@ -21,6 +21,7 @@ import le.data.scs.spider.thread.AbstractProcess;
 
 /**
  * Created by yangyong3 on 2017/3/9.
+ * 天猫评论种子抓取线程
  */
 public class TmallCommentCrawlerThread extends AbstractProcess<TMallCommentEntity> {
     public TmallCommentCrawlerThread(String seedQueueName, String errorQueueName, Class<TMallCommentEntity> tMallCommentEntityClass) {

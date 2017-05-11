@@ -10,6 +10,7 @@ import le.data.scs.spider.crawler.crawler.common.CrawlerType;
 
 /**
  * Created by yangyong3 on 2017/3/8.
+ * 京东评论抓取器
  */
 public class JDCommentsCrawler extends CrawlerAdapter<JDCommentEntity> {
 

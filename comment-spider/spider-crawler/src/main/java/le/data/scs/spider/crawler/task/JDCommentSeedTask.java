@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by yangyong3 on 2017/3/8.
+ * 京东评论种子发现任务
  */
 public class JDCommentSeedTask extends ZKDistributedLeaderTaskAdapter {
 

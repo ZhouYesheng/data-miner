@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by yangyong3 on 2017/3/9.
+ * 天猫评论种子发现任务
  */
 public class TmallCommentSeedTask extends ZKDistributedLeaderTaskAdapter {
 

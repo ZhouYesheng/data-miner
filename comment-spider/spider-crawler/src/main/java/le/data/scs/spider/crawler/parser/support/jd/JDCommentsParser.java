@@ -18,6 +18,7 @@ import java.util.Map;
 
 /**
  * Created by yangyong3 on 2017/3/8.
+ * 京东评论解析器
  */
 public class JDCommentsParser implements Parser<CommentLog, JDCommentEntity> {
 

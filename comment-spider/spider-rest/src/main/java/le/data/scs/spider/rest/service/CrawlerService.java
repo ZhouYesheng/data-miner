@@ -29,12 +29,34 @@ public class CrawlerService {
 
     private TMallSpiderService tMallSpiderService = new TMallSpiderService();
 
+    /**
+     * 发布天猫评论种子信息
+     * @param tMallCommentEntity
+     * @throws IllegalAccessException
+     * @throws ParserException
+     * @throws CrawlerException
+     * @throws InstantiationException
+     * @throws MQException
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
     @RequestMapping(value = "/seed/comment/tmall", method = RequestMethod.POST)
     public void tmallComment(@RequestBody TMallCommentEntity tMallCommentEntity) throws IllegalAccessException, ParserException, CrawlerException, InstantiationException, MQException, ClassNotFoundException, IOException {
         System.out.println(tMallCommentEntity);
         tMallSpiderService.saveCommentSeed(tMallCommentEntity);
     }
 
+    /**
+     * 发布京东评论种子信息
+     * @param jdCommentEntity
+     * @throws IllegalAccessException
+     * @throws ParserException
+     * @throws CrawlerException
+     * @throws InstantiationException
+     * @throws MQException
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
     @RequestMapping(value = "/seed/comment/jd", method = RequestMethod.POST)
     public void jdCommentSeed(@RequestBody JDCommentEntity jdCommentEntity) throws IllegalAccessException, ParserException, CrawlerException, InstantiationException, MQException, ClassNotFoundException, IOException {
         System.out.println(jdCommentEntity);

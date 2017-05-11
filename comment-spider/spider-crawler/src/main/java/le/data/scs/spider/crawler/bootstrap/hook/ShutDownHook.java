@@ -35,20 +35,27 @@ public class ShutDownHook extends Thread {
         this.processList = processList;
     }
 
+    /**
+     * 在进程收到kill -15信号量时执行
+     */
     @Override
     public void run() {
         try {
             logger.info("spider is stopping " + new Date());
+            //首先停掉线程池
             threadPool.shutdown(false);
             logger.info("shut down thread pool " + new Date());
             for (AbstractProcess process : processList)
                 process.stop();
             //设置线程池监控
             threadPool.monitor(10, TimeUnit.SECONDS, 10);
+            //停止Zookeeper client
             ZKClientFactory.getZKClient().close();
             logger.info("Zookeeper client closed");
+            //停止Selenum客户端
             SeleniumTools.quit();
             logger.info("SeleniumTools quit");
+            //关闭数据库连接
             DBConnection.close();
             logger.info("mysql connection close");
             long duration = System.currentTimeMillis() - starttime;

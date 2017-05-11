@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 /**
  * Created by yangyong3 on 2017/3/10.
+ * 爬虫rest服务启动引导程序，采用spring boot
  */
 @SpringBootApplication
 @ComponentScan("le.data.scs.spider.rest")

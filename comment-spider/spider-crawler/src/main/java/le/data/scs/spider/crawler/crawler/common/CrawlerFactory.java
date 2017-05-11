@@ -4,6 +4,7 @@ import le.data.scs.spider.config.BaseFactory;
 
 /**
  * Created by yangyong3 on 2017/2/23.
+ * 抓取器工厂类，通过该类获取抓取器
  */
 public class CrawlerFactory {
 
