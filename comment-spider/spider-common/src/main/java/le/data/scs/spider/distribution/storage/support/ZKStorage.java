@@ -10,6 +10,7 @@ import org.apache.zookeeper.CreateMode;
 
 /**
  * Created by young.yang on 2017/2/25.
+ * 基于zookeeper实现的一个共享存储
  */
 public class ZKStorage<T> implements DistributeStorage<T> {
 

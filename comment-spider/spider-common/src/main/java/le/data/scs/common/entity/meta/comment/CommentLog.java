@@ -5,17 +5,19 @@ import java.util.List;
 
 /**
  * Created by yangyong3 on 2017/3/8.
+ * 评论实体类
  */
 public class CommentLog implements Serializable{
 
+    //该评论的url
     private String url;
-
+    //该评论的商品id
     private String productId;
-
+    //md5
     private String md5;
-
+    //该评论中的关键词
     private List<String> tags;
-
+    //评论明细
     private List<CommentDetail> details;
 
     public List<String> getTags() {

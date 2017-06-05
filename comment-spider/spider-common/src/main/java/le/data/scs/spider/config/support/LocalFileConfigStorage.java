@@ -11,6 +11,7 @@ import java.io.IOException;
 
 /**
  * Created by yangyong3 on 2017/2/22.
+ * 从本地文件中读取xml配置文件
  */
 public class LocalFileConfigStorage extends AbstractStorage implements ConfigStorage {
 

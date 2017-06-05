@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * Created by yangyong3 on 2017/3/1.
+ * 对应配置文件中的task标签
  */
 @XStreamAlias("task")
 public class SpiderTask implements Serializable{

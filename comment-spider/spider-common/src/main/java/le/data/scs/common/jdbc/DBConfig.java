@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by yangyong3 on 2017/3/15.
+ * 数据库配置文件对应的读取类，用来读取db.properties配置文件
  */
 public class DBConfig {
     private static final ResourceBundle bundle = ResourceBundle.getBundle("db", Locale.getDefault());

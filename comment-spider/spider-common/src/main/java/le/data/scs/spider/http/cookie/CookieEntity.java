@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by yangyong3 on 2017/2/27.
+ * cookie实体，保存cookie相关的信息
  */
 public class CookieEntity implements Serializable {
     private String name;

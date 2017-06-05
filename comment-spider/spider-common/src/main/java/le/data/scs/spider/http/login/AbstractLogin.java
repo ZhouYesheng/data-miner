@@ -19,24 +19,79 @@ import java.util.Set;
 
 /**
  * Created by yangyong3 on 2017/2/27.
+ * 登录网站抽象类，定义了登录一个网站的具体步骤
  */
 public abstract class AbstractLogin implements LoginAction {
     private static final Logger logger = LoggerFactory.getLogger(AbstractLogin.class);
 
+    /**
+     * 初始化，打开登录url
+     * @param webDriver
+     * @param login
+     * @throws LoginException
+     */
     protected abstract void init(WebDriver webDriver, SpiderCookieLogin login) throws LoginException;
 
+    /**
+     * 获取数据用户名
+     * @param webDriver
+     * @param login
+     * @return
+     * @throws LoginException
+     */
     protected abstract WebElement getUsername(WebDriver webDriver, SpiderCookieLogin login) throws LoginException;
 
+    /**
+     * 输入密码
+     * @param webDriver
+     * @param login
+     * @return
+     * @throws LoginException
+     */
     protected abstract WebElement getPassword(WebDriver webDriver, SpiderCookieLogin login) throws LoginException;
 
+    /**
+     * 点击提交
+     * @param webDriver
+     * @param login
+     * @return
+     * @throws LoginException
+     */
     protected abstract WebElement getSubmit(WebDriver webDriver, SpiderCookieLogin login) throws LoginException;
 
+    /**
+     * 判断是否需要输入验证码
+     * @param webDriver
+     * @param login
+     * @return
+     * @throws LoginException
+     */
     protected abstract boolean isNeedCode(WebDriver webDriver, SpiderCookieLogin login) throws LoginException;
 
+    /**
+     * 破解验证码
+     * @param webDriver
+     * @param login
+     * @return
+     * @throws LoginException
+     */
     protected abstract WebElement validateCode(WebDriver webDriver, SpiderCookieLogin login) throws LoginException;
 
+    /**
+     * 完成登录
+     * @param webDriver
+     * @param login
+     * @throws LoginException
+     */
     protected abstract void finish(WebDriver webDriver, SpiderCookieLogin login) throws LoginException;
 
+    /**
+     * 查看是否已经登录
+     * @param webDriver
+     * @param login
+     * @return
+     * @throws LoginException
+     */
     protected abstract boolean isLogined(WebDriver webDriver, SpiderCookieLogin login) throws LoginException;
 
     /**

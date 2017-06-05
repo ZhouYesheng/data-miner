@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 /**
  * Created by yangyong3 on 2017/2/16.
+ * 数据抓取返回结果
  */
 public class CrawlerEntity<T> implements Serializable{
+    //元数据
     private T meta;
-
+    //报文数据
     private String body;
 
     public T getMeta() {

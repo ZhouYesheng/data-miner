@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by yangyong3 on 2017/2/22.
+ * 对应xml配置文件中的messageQueue标签
  */
 @XStreamAlias("messageQueue")
 public class SpiderMessageQueue implements Serializable{

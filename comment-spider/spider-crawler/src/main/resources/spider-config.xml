@@ -61,16 +61,11 @@
     </cookies>
     <!--线程池配置-->
     <threads poolsize="30">
-        <thread name="jd_crawler_detail_thread" classname="le.data.scs.spider.crawler.thread.jd.JDChatCrawlerThread" size="2" use="false"></thread>
-        <thread name="tmall_crawler_detail_thread" classname="le.data.scs.spider.crawler.thread.tmall.TmallChatCrawlerThread" size="5" use="false"></thread>
         <thread name="jd_crawler_comment_thread" classname="le.data.scs.spider.crawler.thread.jd.JDCommentCrawlerThread" size="2" use="true"/>
         <thread name="tmall_crawler_comment_thread" classname="le.data.scs.spider.crawler.thread.tmall.TmallCommentCrawlerThread" size="2" use="true" />
     </threads>
     <!--zookeeper leader task配置-->
     <tasks>
-        <task name="JDseedTask" classname="le.data.scs.spider.crawler.task.JDCrawlerSeedTask" use="false"/>
-        <task name="TMallseedTask" classname="le.data.scs.spider.crawler.task.TmallCrawlerSeedTask" use="false" />
-        <task name="LEmallChatTask" classname="le.data.scs.spider.crawler.task.LeMallWebChatTask" use="false" />
         <task name="JDCommentSeedTask" classname="le.data.scs.spider.crawler.task.JDCommentSeedTask" use="true" />
         <task name="TMALLCommentSeedTask" classname="le.data.scs.spider.crawler.task.TmallCommentSeedTask" use="true" />
     </tasks>

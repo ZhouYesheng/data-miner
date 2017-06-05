@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by yangyong3 on 2017/3/1.
+ * 对应配置文件中的threads标签
  */
 @XStreamAlias("threads")
 public class SpiderThreads implements Serializable{

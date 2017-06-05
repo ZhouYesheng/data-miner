@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Created by yangyong3 on 2017/2/22.
+ *从zookeeper中读取xml配置文件，采用分布式的方式多个实例可以共享一份配置文件
  */
 public class ZKConfigStorage extends AbstractStorage implements ConfigStorage {
 

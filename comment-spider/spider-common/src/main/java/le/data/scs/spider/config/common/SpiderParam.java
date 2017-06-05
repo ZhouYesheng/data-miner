@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * Created by yangyong3 on 2017/2/22.
+ * 对应配置文件中的param标签
  */
 @XStreamAlias("param")
 public class SpiderParam implements Serializable {

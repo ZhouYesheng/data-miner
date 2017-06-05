@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Created by young.yang on 2017/2/25.
+ * 抓取线程抽象类，规定了数据抓取的整体流程，包括失败重试，友好访问策略等等
  */
 public abstract class AbstractProcess<T> implements Runnable {
 
@@ -33,10 +34,18 @@ public abstract class AbstractProcess<T> implements Runnable {
         this.tClass = tClass;
     }
 
+    /**
+     * 停止抓取线程
+     */
     public void stop() {
         this.stop = true;
     }
 
+    /**
+     * 处理抓取任务
+     * @param t
+     * @throws Exception
+     */
     public abstract void process(T t) throws Exception;
 
     public void run() {

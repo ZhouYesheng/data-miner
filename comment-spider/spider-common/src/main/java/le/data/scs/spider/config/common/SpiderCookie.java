@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by yangyong3 on 2017/2/22.
+ * 对应xml配置文件中的cookies标签
  */
 @XStreamAlias("cookies")
 public class SpiderCookie {

@@ -24,6 +24,12 @@ public class JDCommentsCrawler extends CrawlerAdapter<JDCommentEntity> {
         this(CrawlerType.JD);
     }
 
+    /**
+     * 创建一个京东种子请求对象
+     * @param jdCommentEntity
+     * @return
+     * @throws CrawlerException
+     */
     @Override
     public Request createRuquest(JDCommentEntity jdCommentEntity) throws CrawlerException {
         String url = getUrl(baseUrl,jdCommentEntity);
@@ -33,6 +39,12 @@ public class JDCommentsCrawler extends CrawlerAdapter<JDCommentEntity> {
         return new Request(url,null,null,"gb2312");
     }
 
+    /**
+     * 生成京东评论种子url
+     * @param baseUrl
+     * @param jdCommentEntity
+     * @return
+     */
     private String getUrl(String baseUrl, JDCommentEntity jdCommentEntity) {
         StringBuilder url = new StringBuilder();
         url.append(baseUrl);
@@ -45,6 +57,14 @@ public class JDCommentsCrawler extends CrawlerAdapter<JDCommentEntity> {
         return url.toString();
     }
 
+    /**
+     * 检查Request的有效性
+     * @param request
+     * @param response
+     * @param jdCommentEntity
+     * @return
+     * @throws CrawlerException
+     */
     @Override
     public boolean check(Request request, Response response, JDCommentEntity jdCommentEntity) throws CrawlerException {
         return baseCheck(request,response,jdCommentEntity);

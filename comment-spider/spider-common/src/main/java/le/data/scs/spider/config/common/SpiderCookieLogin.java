@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * Created by yangyong3 on 2017/2/22.
+ * 对应配置文件中的login标签
  */
 @XStreamAlias("login")
 public class SpiderCookieLogin implements Serializable{

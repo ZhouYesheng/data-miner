@@ -5,6 +5,7 @@ import le.data.scs.spider.utils.XmlUtils;
 
 /**
  * Created by yangyong3 on 2017/2/22.
+ *
  */
 public abstract class AbstractStorage {
 

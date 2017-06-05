@@ -15,6 +15,7 @@ import java.util.Map;
 
 /**
  * Created by yangyong3 on 2016/12/1.
+ * 基于Jsoup实现的HttpWalker网页抓取器
  */
 public class JsoupWalker extends AbstractHttpWalker implements HttpWalker {
 

@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * Created by yangyong3 on 2017/2/16.
+ * Http Request对象
  */
 public class Request implements Serializable {
     public String getUrl() {

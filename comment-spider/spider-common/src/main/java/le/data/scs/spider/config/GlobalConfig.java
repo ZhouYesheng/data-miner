@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by yangyong3 on 2017/2/22.
+ * 全局配置文件读取类，读取spider.properties配置文件中的内容
  */
 public class GlobalConfig {
 

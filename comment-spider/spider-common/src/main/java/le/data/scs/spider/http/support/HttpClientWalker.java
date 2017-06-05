@@ -29,6 +29,7 @@ import java.util.Map;
 
 /**
  * Created by yangyong3 on 2017/2/15.
+ * 基于HttpClient实现的HttpWalker网页抓取器
  */
 public class HttpClientWalker extends AbstractHttpWalker implements HttpWalker {
 

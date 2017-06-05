@@ -4,20 +4,22 @@ import java.io.Serializable;
 
 /**
  * Created by yangyong3 on 2017/3/8.
+ * 京东评论种子实体
  */
 public class JDCommentEntity implements Serializable {
+    //商品的主页url
     private String pageUrl;
-
+    //商品名称
     private String pName;
-
+    //md5
     private String md5;
-
+    //商品ID
     private String productId;
-
+    //排序规则，该字段是京东平台使用，采用默认值即可
     private String sortType = "6";
-
+    //当前页码
     private Integer page = 1;
-
+    //每页数据条数
     private Integer pageSize = 10;
 
     private String isShadowSku ="0";

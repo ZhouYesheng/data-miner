@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * Created by yangyong3 on 2017/2/22.
+ * 对应配置文件中的thread标签
  */
 @XStreamAlias("thread")
 public class SpiderThread implements Serializable {

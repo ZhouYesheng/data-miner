@@ -1,12 +1,9 @@
 package le.data.scs.spider.crawler.persist.support.mysql;
 
-import le.data.scs.common.entity.meta.chat.ChatLog;
 import le.data.scs.common.entity.meta.comment.CommentDetail;
 import le.data.scs.common.entity.meta.comment.CommentLog;
 import le.data.scs.common.jdbc.DBConnection;
 import le.data.scs.spider.crawler.crawler.common.CrawlerType;
-import le.data.scs.spider.utils.JsonUtils;
-import le.data.scs.spider.utils.MD5;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.sql.*;
@@ -18,91 +15,17 @@ import java.util.List;
 
 /**
  * Created by yangyong3 on 2017/3/15.
+ * 数据存储工具类
  */
 public class PersisterDao {
 
     private static final DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public static void saveChatLogs(List<ChatLog> chatLogList, CrawlerType type) {
-        Connection con = null;
-        PreparedStatement ps = null;
-
-        try {
-            StringBuilder sql = new StringBuilder(100);
-            sql.append("insert into scs_chat_log(waiter,customer,create_time,insert_time,content,`type`,md5,create_timestamp) values(?,?,?,?,?,?,?,?)");
-            con = DBConnection.getConnection();
-            ps = con.prepareStatement(sql.toString());
-            for (ChatLog log : chatLogList) {
-                String createtime = log.getChatDetails().get(0).getCreateTime();
-                ps.setString(1, log.getWaiter());
-                ps.setString(2, log.getCustomer());
-                ps.setString(3, createtime);
-                ps.setString(4, format.format(new Date()));
-                ps.setString(5, JsonUtils.toJson(log));
-                ps.setString(6, type.toString());
-                ps.setString(7, MD5.md5(createtime + "_" + log.getWaiter() + "_" + log.getCustomer()));
-                ps.setLong(8, format.parse(createtime).getTime());
-                ps.addBatch();
-            }
-            ps.executeBatch();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static ChatLog findChatById(String id) {
-        Connection con = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        ChatLog log = null;
-        try {
-            StringBuilder sql = new StringBuilder(100);
-            sql.append("select * from scs_chat_log where id = " + id);
-            con = DBConnection.getConnection();
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql.toString());
-            if (rs.next()) {
-                log = JsonUtils.fromJson(rs.getString("content"), ChatLog.class);
-                log.setId(rs.getLong("id") + "");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close(stmt, rs);
-        }
-        return log;
-    }
-
-    public static List<String> listCommentSeed() {
-        Connection con = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        ChatLog log = null;
-        List<String> seeds = new ArrayList<>();
-        try {
-            StringBuilder sql = new StringBuilder(100);
-            sql.append("select body from scs_comment_seed ");
-            con = DBConnection.getConnection();
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql.toString());
-            while(rs.next()){
-                seeds.add(rs.getString("body"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close(stmt, rs);
-        }
-        return seeds;
-    }
-
-
+    /**
+     * 保存抓取完成的评论数据
+     * @param log
+     * @param type
+     */
     public static void saveComments(CommentLog log, CrawlerType type) {
         if (CollectionUtils.isEmpty(log.getDetails()))
             return;
@@ -138,6 +61,11 @@ public class PersisterDao {
         }
     }
 
+    /**
+     * 查看评论是否存在
+     * @param md5
+     * @return
+     */
     public static boolean existCommentSeed(String md5){
         Connection con = null;
         Statement stmt = null;
@@ -159,6 +87,7 @@ public class PersisterDao {
         }
         return false;
     }
+
 
     public static void saveCommentSeed(String md5,String url,String jsonData,String type){
         Connection con = null;

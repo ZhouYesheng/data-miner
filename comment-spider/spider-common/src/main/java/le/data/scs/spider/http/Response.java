@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 /**
  * Created by yangyong3 on 2017/2/16.
+ * Http Response对象
  */
 public class Response implements Serializable{
     private Integer statusCode;

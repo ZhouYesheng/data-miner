@@ -5,35 +5,37 @@ import java.util.List;
 
 /**
  * Created by yangyong3 on 2017/3/9.
+ * 天猫数据评论实体类
  */
 public class TMallCommentEntity implements Serializable {
 
+    //商品主页url
     private String url;
-
+    //md5
     private String md5;
-
+    //商品名称
     private String pName;
-
+    //天猫平台使用参数，默认值即可
     private String tbpm;
-
+    //商品itemId
     private String itemId;
-
+    //天猫平台使用参数，默认值即可
     private String spuId;
-
+    //天猫平台使用参数，默认值即可
     private String sellerId;
-
+    //天猫平台使用参数，默认值即可
     private String order;
-
+    //当前页码
     private Integer currentPage;
-
+    //天猫平台使用参数，默认值即可
     private String append;
-
+    //天猫平台使用参数，默认值即可
     private String content;
-
+    //天猫平台使用参数，默认值即可
     private Boolean isAll;
-
+    //天猫平台使用参数，默认值即可
     private Boolean isInner;
-
+    //天猫平台使用参数，默认值即可
     private String type;
 
     private Long t = System.currentTimeMillis();

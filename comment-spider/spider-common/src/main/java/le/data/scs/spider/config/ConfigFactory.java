@@ -17,6 +17,7 @@ import java.util.Random;
 
 /**
  * Created by yangyong3 on 2017/2/22.
+ * 配置文件对象工厂类，可以采用该类获取配置文件中的任何数据
  */
 public class ConfigFactory {
 
@@ -37,6 +38,11 @@ public class ConfigFactory {
         }
     }
 
+    /**
+     * 获取SpiderConfig对象，默认读取spider.properties配置文件
+     * @return
+     * @throws SpiderConfigException
+     */
     public static SpiderConfig getConfig() throws SpiderConfigException {
         if (spiderConfig != null)
             return spiderConfig;
@@ -56,13 +62,24 @@ public class ConfigFactory {
         return spiderConfig;
     }
 
+    /**
+     * 获取配置文件中的property标签中的数据
+     * @param key
+     * @return
+     * @throws SpiderConfigException
+     */
     public static String getProperty(String key) throws SpiderConfigException {
         if (properties != null && !properties.isEmpty())
             return properties.get(key);
         getConfig();
         return properties.get(key);
     }
-
+    /**
+     * 获取配置文件中的property标签中的数据
+     * @param key
+     * @return
+     * @throws SpiderConfigException
+     */
     public static String getProperty(String key, String defaultValue) throws SpiderConfigException {
         String val = getProperty(key);
         if (StringUtils.isBlank(val)) {
